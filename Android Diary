@@ -1,0 +1,162 @@
+2021/Oct/25
+
+
+Define Items:
+
+Button button;
+TextView text ;
+
+
+Pass Intent To Activity:
+
+final Intent intent = new Intent(getApplicationContext(), Activitytwo.class);
+        String name = "Tharusha Thishakya";
+        intent.putExtra("USER_NAME", name);
+        //use putint to pass integer
+        
+Start Screen /Activity :
+
+   final Intent intent = new Intent(getApplicationContext(), Activitytwo.class);
+     startActivity(intent);
+     
+Button Click Listener:
+
+  button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               //Activity
+            }
+        });
+        
+        
+Catch Value From Screen:
+
+       Intent intent = getIntent();
+        String getname = intent.getStringExtra("USER_NAME"); 
+        
+        
+ Start Email:
+ 
+    Intent intent = new Intent(Intent.ACTION_SEND);
+         final Intent chooser ;
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_EMAIL,new String []{"codegen@gmail.com"});
+        intent.putExtra(Intent.EXTRA_SUBJECT,"Hello");
+        intent.putExtra(Intent.EXTRA_TEXT,"Hello I am Email Context");
+        intent.setType("message/rfc822");
+        chooser = Intent.createChooser(intent,"Select App To send");
+        
+        startActivity(chooser);
+        
+        ------Design-----
+        
+  Layout Weight:
+  
+   <Button
+       android:layout_width="match_parent"
+       android:layout_weight="1"
+       android:layout_height="wrap_content"
+       android:text="Hello World"></Button>
+
+
+   <Button
+       android:layout_width="match_parent"
+       android:layout_weight="1"
+       android:layout_height="wrap_content"
+       android:text="Hello World"></Button>
+   <Button
+       android:layout_width="match_parent"
+       android:layout_weight="1"
+       android:layout_height="wrap_content"
+       android:text="Hello World"></Button>
+   			    
+       
+ Toast :
+ 
+ Toast maketest =  Toast.makeText(getApplicationContext(), "Hello World", Toast.LENGTH_SHORT);
+ maketest.show();
+ 
+ 
+ Get Strings:
+ 
+     name = User_Name.getText().toString();
+           age = Integer.parseInt(User_Age.getText().toString());
+           
+           
+   Save Shared Preferences:
+   
+           Get_Data = findViewById(R.id.load);
+        Save_Data = findViewById(R.id.savebtn);
+        User_Name = findViewById(R.id.editTextTextPersonName);
+        User_Age = findViewById(R.id.editTextTextPersonName2);
+
+        Save_Data.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+           name = User_Name.getText().toString();
+           age = Integer.parseInt(User_Age.getText().toString());
+
+
+                SharedPreferences prf = getSharedPreferences("name",MODE_PRIVATE);
+                SharedPreferences.Editor editor =prf.edit();
+                editor.putString("name",name);
+                editor.putInt("age",age);
+                editor.commit();
+            }
+
+        });
+        
+        
+  Load Data:
+  
+    Get_Data.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences prf =getSharedPreferences("name",MODE_PRIVATE);
+                String Name = prf.getString("name","no name");
+                int Age = prf.getInt("age",0);
+                Toast.makeText(getApplicationContext(),"Your Name : "+Name+" And Your age is "+Age,Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+        
+        
+   Get And Listview :
+   
+   
+        String[] countries = new String[]{"Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegowina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Congo, the Democratic Republic of the", "Cook Islands", "Costa Rica", "Cote d'Ivoire", "Croatia (Hrvatska)", , };
+
+        ListAdapter listAdapter = new ArrayAdapter<String>(this,R.layout.listitem,countries);
+
+        listView = findViewById(R.id.list_view);
+        listView.setAdapter(listAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String country = String.valueOf(parent.getItemAtPosition(position));
+                Toast maketest =  Toast.makeText(getApplicationContext(), country, Toast.LENGTH_SHORT);
+                maketest.show();
+
+            }
+        });
+  
+
+
+Make sure to make xml to act as adapter:
+
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+    android:padding="16dp"
+    android:textSize="20sp"
+        android:layout_height="match_parent"/>
+
+        
